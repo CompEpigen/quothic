@@ -20,4 +20,4 @@ devtools::install()
 ```R
 # Install from GitHub
 install.packages("devtools")
-devtools::install_github("username/quothic")
+devtools::install_github("CompEpigen/quothic")
