@@ -87,17 +87,18 @@ RCSA <- function(data_matrix, components = 2) {
   return(ref_vec)
 }
 
-#' Generate Shannon Entropy
+#' Generate Shannon Entropy for intrinsic transcription heterogeneity in a cell
+#'
 #' This function was amended from the scEntropy python codes (https://github.com/jzlei/scEntropy) provided by https://www.worldscientific.com/doi/abs/10.1142/S1793048020500010
 #'
 #' @param seurat_obj A Seurat object
 #' @param ref_vec Optional numeric vector, reference cell expression vector
-#' @param option Character string, method for generating reference vector
+#' @param method Character string, method for generating reference vector. It must be either "predefined" or "RCSA".
 #' @param check_log2 Logical, whether to check and perform log2 transformation if necessary
 #' @param scale Normalize the entropy values to 0-1 range
 #' @return Numeric vector, Shannon entropy values relative to the reference
 #' @export
-shannon_entropy <- function(seurat_obj, ref_vec = NULL, option = 'predefined', check_log2=TRUE, scale=FALSE) {
+shannon_entropy <- function(seurat_obj, ref_vec = NULL, method = 'predefined', check_log2=TRUE, scale=FALSE) {
   data_matrix <- seurat_obj@assays$RNA@data
   # Optionally check if data needs log2 transformation
   if (check_log2) {
@@ -109,11 +110,11 @@ shannon_entropy <- function(seurat_obj, ref_vec = NULL, option = 'predefined', c
     }
   }
 
-  if (option == 'predefined') {
+  if (method == 'predefined') {
     if (is.null(ref_vec)) {
       ref_vec <- get_default_ref(data_matrix)
     }
-  } else if (option == 'RCSA') {
+  } else if (method == 'RCSA') {
     ref_vec <- RCSA(data_matrix)
   } else {
     stop('Parameter error in scEntropy function')
@@ -127,9 +128,9 @@ shannon_entropy <- function(seurat_obj, ref_vec = NULL, option = 'predefined', c
     calc_entropy(col - ref_vec)
   })
 
-  # Normalize the values to 0-1 range
+  # Normalize the values to c(-1,1) range
   if (scale){
-    series_entropy = (series_entropy-min(series_entropy))/(max(series_entropy)-min(series_entropy))
+    series_entropy = 2 * (series_entropy - min(series_entropy)) / (max(series_entropy) - min(series_entropy)) - 1
   }
   return(series_entropy)
 }

@@ -1,7 +1,7 @@
 Package: quothic
 Type: Package
 Title: Calculate Transcriptome Heterogeneity Using Single Cell RNAseq (Seurat Objects)
-Version: 0.0.0.9000
+Version: 0.0.1.0
 Authors@R: 
     person("Mei-Ju May", "Chen", , "chenmjm@gmail.com", role = c("aut", "cre","cph","rev"),
            comment = c(ORCID = "0000-0002-8721-0304"))
@@ -18,7 +18,9 @@ Imports:
     mclust,
     moments,
     tidyr,
-    SeuratData
+    SeuratData,
+    cluster,
+    viridis
 Suggests: 
     knitr,
     rmarkdown,

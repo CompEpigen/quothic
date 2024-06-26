@@ -24,13 +24,15 @@ use_package("ggplot2", type = "Imports")
 use_package("mclust", type = "Imports")
 use_package("moments", type = "Imports")
 use_package("SeuratData", type="Imports")
+use_package("cluster", type="Imports")
+use_package("viridis", type="Imports")
 
 library(devtools)
 devtools::document()
+devtools::load_all()
 
-#devtools::load_all()
 
-# remove.packages("quothic")
+remove.packages("quothic")
 # Restart R session
 setwd("/omics/groups/OE0219/internal/MJMC/Tools/quothic")
 devtools::install(upgrade = "never")

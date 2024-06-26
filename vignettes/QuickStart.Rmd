@@ -36,8 +36,8 @@ obj <- RunPCA(obj, features = VariableFeatures(object = obj))
 obj = RunUMAP(object = obj, dims = 1:10)
 
 # Example usage
-#entropy <- shannon_entropy(obj, option="predefined")
-entropy <- shannon_entropy(obj, option="RCSA")
+#entropy <- shannon_entropy(obj, method="predefined")
+entropy <- shannon_entropy(obj, method="RCSA")
 obj = AddMetaData(obj, entropy, col.name = "unitTH")
 
 VlnPlot(obj, features = "unitTH", group.by = "embryo.time.bin") + NoLegend()
@@ -52,8 +52,8 @@ FeaturePlot(obj, features = "unitTH")
 #SeuratData::InstallData("pbmc3k")
 pbmc3k.final <- LoadData("pbmc3k", type = "pbmc3k.final")
 # Example usage
-#entropy <- shannon_entropy(pbmc3k.final, option="predefined")
-entropy <- shannon_entropy(pbmc3k.final, option="RCSA")
+#entropy <- shannon_entropy(pbmc3k.final, method="predefined")
+entropy <- shannon_entropy(pbmc3k.final, method="RCSA")
 pbmc3k.final = AddMetaData(pbmc3k.final, entropy, col.name = "unitTH")
 
 #summary(pbmc_small@meta.data)

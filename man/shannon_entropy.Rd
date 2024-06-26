@@ -2,13 +2,12 @@
 % Please edit documentation in R/shannon_entropy.R
 \name{shannon_entropy}
 \alias{shannon_entropy}
-\title{Generate Shannon Entropy
-This function was amended from the scEntropy python codes (https://github.com/jzlei/scEntropy) provided by https://www.worldscientific.com/doi/abs/10.1142/S1793048020500010}
+\title{Generate Shannon Entropy for intrinsic transcription heterogeneity in a cell}
 \usage{
 shannon_entropy(
   seurat_obj,
   ref_vec = NULL,
-  option = "predefined",
+  method = "predefined",
   check_log2 = TRUE,
   scale = FALSE
 )
@@ -18,7 +17,7 @@ shannon_entropy(
 
 \item{ref_vec}{Optional numeric vector, reference cell expression vector}
 
-\item{option}{Character string, method for generating reference vector}
+\item{method}{Character string, method for generating reference vector. It must be either "predefined" or "RCSA".}
 
 \item{check_log2}{Logical, whether to check and perform log2 transformation if necessary}
 
@@ -28,6 +27,5 @@ shannon_entropy(
 Numeric vector, Shannon entropy values relative to the reference
 }
 \description{
-Generate Shannon Entropy
 This function was amended from the scEntropy python codes (https://github.com/jzlei/scEntropy) provided by https://www.worldscientific.com/doi/abs/10.1142/S1793048020500010
 }
