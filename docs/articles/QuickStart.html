@@ -69,7 +69,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>QuickStart</h1>
+                        <h4 data-toc-skip class="author">Mei-Ju May
+Chen</h4>
             
+            <h4 data-toc-skip class="date">2024-06-28</h4>
       
       
       <div class="hidden name"><code>QuickStart.Rmd</code></div>
@@ -81,29 +84,10 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">quothic</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Attaching SeuratObject</span></span>
-<span><span class="co">#&gt; Seurat v4 was just loaded with SeuratObject v5; disabling v5 assays and</span></span>
-<span><span class="co">#&gt; validation routines, and ensuring assays work in strict v3/v4</span></span>
-<span><span class="co">#&gt; compatibility mode</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.satijalab.org/seurat" class="external-link">SeuratData</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Installed datasets</span> ──────────────────────────────── SeuratData v0.2.2.9001 ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">celegans.embryo</span> 0.1.0                 <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stxBrain       </span> 0.1.1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">pbmc3k         </span> 3.1.4</span></span>
-<span><span class="co">#&gt; ────────────────────────────────────── Key ─────────────────────────────────────</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Dataset loaded successfully</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">❯</span> Dataset built with a newer version of Seurat than installed</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">❓</span> Unknown version of Seurat installed</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.satijalab.org/seurat" class="external-link">SeuratData</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#SeuratData::InstallData("celegans.embryo")</span></span>
 <span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/LoadData.html" class="external-link">LoadData</a></span><span class="op">(</span><span class="st">"celegans.embryo"</span>, type<span class="op">=</span><span class="st">"default"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Validating object structure</span></span>
-<span><span class="co">#&gt; Updating object slots</span></span>
-<span><span class="co">#&gt; Ensuring keys are in the proper structure</span></span>
-<span><span class="co">#&gt; Ensuring keys are in the proper structure</span></span>
-<span><span class="co">#&gt; Ensuring feature names don't have underscores or pipes</span></span>
-<span><span class="co">#&gt; Updating slots in RNA</span></span>
-<span><span class="co">#&gt; Validating object structure for Assay 'RNA'</span></span>
-<span><span class="co">#&gt; Object representation is consistent with the most current Seurat version</span></span>
 <span></span>
 <span><span class="va">obj</span><span class="op">[[</span><span class="st">"percent.mt"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/PercentageFeatureSet.html" class="external-link">PercentageFeatureSet</a></span><span class="op">(</span><span class="va">obj</span>, pattern <span class="op">=</span> <span class="st">"^MT-"</span><span class="op">)</span></span>
 <span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">obj</span>, subset <span class="op">=</span> <span class="va">nFeature_RNA</span> <span class="op">&gt;</span> <span class="fl">200</span> <span class="op">&amp;</span> <span class="va">nFeature_RNA</span> <span class="op">&lt;</span> <span class="fl">2500</span> <span class="op">&amp;</span> <span class="va">percent.mt</span> <span class="op">&lt;</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -112,149 +96,58 @@
 <span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindVariableFeatures.html" class="external-link">FindVariableFeatures</a></span><span class="op">(</span><span class="va">obj</span>, selection.method <span class="op">=</span> <span class="st">"vst"</span>, nfeatures <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span>
 <span><span class="va">all.genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">obj</span><span class="op">)</span></span>
 <span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/ScaleData.html" class="external-link">ScaleData</a></span><span class="op">(</span><span class="va">obj</span>, features <span class="op">=</span> <span class="va">all.genes</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Centering and scaling data matrix</span></span>
 <span><span class="va">obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/RunPCA.html" class="external-link">RunPCA</a></span><span class="op">(</span><span class="va">obj</span>, features <span class="op">=</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/VariableFeatures.html" class="external-link">VariableFeatures</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">obj</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; PC_ 1 </span></span>
-<span><span class="co">#&gt; Positive:  WBGene00016463, WBGene00011500, WBGene00007883, WBGene00249817, WBGene00004346, WBGene00022144, WBGene00012853, WBGene00008453, WBGene00003851, WBGene00004207 </span></span>
-<span><span class="co">#&gt;     WBGene00011545, WBGene00008288, WBGene00001189, WBGene00010236, WBGene00017671, WBGene00010239, WBGene00219372, WBGene00019324, WBGene00011289, WBGene00021395 </span></span>
-<span><span class="co">#&gt;     WBGene00022419, WBGene00001122, WBGene00020710, WBGene00009716, WBGene00003642, WBGene00005655, WBGene00044144, WBGene00010864, WBGene00016321, WBGene00000277 </span></span>
-<span><span class="co">#&gt; Negative:  WBGene00009212, WBGene00015610, WBGene00002253, WBGene00013553, WBGene00018606, WBGene00001854, WBGene00000217, WBGene00044066, WBGene00022111, WBGene00016088 </span></span>
-<span><span class="co">#&gt;     WBGene00011156, WBGene00022112, WBGene00016071, WBGene00235158, WBGene00012021, WBGene00012899, WBGene00020537, WBGene00020205, WBGene00008447, WBGene00000405 </span></span>
-<span><span class="co">#&gt;     WBGene00009385, WBGene00000411, WBGene00003159, WBGene00269431, WBGene00002085, WBGene00012900, WBGene00000868, WBGene00021299, WBGene00003902, WBGene00008510 </span></span>
-<span><span class="co">#&gt; PC_ 2 </span></span>
-<span><span class="co">#&gt; Positive:  WBGene00020582, WBGene00011763, WBGene00016711, WBGene00006055, WBGene00016254, WBGene00016289, WBGene00021915, WBGene00001548, WBGene00001543, WBGene00001535 </span></span>
-<span><span class="co">#&gt;     WBGene00017076, WBGene00044568, WBGene00018136, WBGene00000895, WBGene00020190, WBGene00164973, WBGene00003591, WBGene00044068, WBGene00009152, WBGene00011534 </span></span>
-<span><span class="co">#&gt;     WBGene00015214, WBGene00045056, WBGene00016328, WBGene00007490, WBGene00009153, WBGene00000233, WBGene00011433, WBGene00002141, WBGene00007542, WBGene00009375 </span></span>
-<span><span class="co">#&gt; Negative:  WBGene00010559, WBGene00015354, WBGene00008840, WBGene00007604, WBGene00019269, WBGene00017150, WBGene00005585, WBGene00010575, WBGene00005387, WBGene00001992 </span></span>
-<span><span class="co">#&gt;     WBGene00010632, WBGene00015411, WBGene00004926, WBGene00017236, WBGene00010144, WBGene00005399, WBGene00011644, WBGene00009842, WBGene00022391, WBGene00005338 </span></span>
-<span><span class="co">#&gt;     WBGene00016561, WBGene00008184, WBGene00019980, WBGene00077698, WBGene00005542, WBGene00009136, WBGene00019975, WBGene00007247, WBGene00018081, WBGene00044922 </span></span>
-<span><span class="co">#&gt; PC_ 3 </span></span>
-<span><span class="co">#&gt; Positive:  WBGene00044068, WBGene00007641, WBGene00019482, WBGene00007490, WBGene00219310, WBGene00018352, WBGene00011328, WBGene00007286, WBGene00001123, WBGene00017243 </span></span>
-<span><span class="co">#&gt;     WBGene00194982, WBGene00004213, WBGene00001210, WBGene00001824, WBGene00009144, WBGene00016005, WBGene00017326, WBGene00021915, WBGene00008144, WBGene00008865 </span></span>
-<span><span class="co">#&gt;     WBGene00022696, WBGene00001954, WBGene00000950, WBGene00015580, WBGene00022419, WBGene00017295, WBGene00020196, WBGene00000220, WBGene00021396, WBGene00001951 </span></span>
-<span><span class="co">#&gt; Negative:  WBGene00003591, WBGene00020582, WBGene00017076, WBGene00001548, WBGene00018136, WBGene00164973, WBGene00011534, WBGene00001543, WBGene00044568, WBGene00015214 </span></span>
-<span><span class="co">#&gt;     WBGene00007542, WBGene00009375, WBGene00006055, WBGene00045056, WBGene00011545, WBGene00001535, WBGene00003752, WBGene00021116, WBGene00020136, WBGene00004924 </span></span>
-<span><span class="co">#&gt;     WBGene00020759, WBGene00006981, WBGene00019293, WBGene00011137, WBGene00000277, WBGene00000233, WBGene00018298, WBGene00002097, WBGene00017597, WBGene00012853 </span></span>
-<span><span class="co">#&gt; PC_ 4 </span></span>
-<span><span class="co">#&gt; Positive:  WBGene00012616, WBGene00013748, WBGene00004346, WBGene00017129, WBGene00044387, WBGene00044419, WBGene00044562, WBGene00044144, WBGene00022295, WBGene00044238 </span></span>
-<span><span class="co">#&gt;     WBGene00001988, WBGene00001681, WBGene00012064, WBGene00009810, WBGene00011500, WBGene00219421, WBGene00194689, WBGene00010647, WBGene00011289, WBGene00005560 </span></span>
-<span><span class="co">#&gt;     WBGene00007883, WBGene00012016, WBGene00004091, WBGene00044553, WBGene00010864, WBGene00001676, WBGene00022842, WBGene00010239, WBGene00005975, WBGene00008288 </span></span>
-<span><span class="co">#&gt; Negative:  WBGene00001548, WBGene00001543, WBGene00044568, WBGene00001535, WBGene00017076, WBGene00164973, WBGene00011534, WBGene00018136, WBGene00009152, WBGene00015214 </span></span>
-<span><span class="co">#&gt;     WBGene00000895, WBGene00020582, WBGene00007542, WBGene00011838, WBGene00006652, WBGene00007314, WBGene00045056, WBGene00009153, WBGene00000233, WBGene00003745 </span></span>
-<span><span class="co">#&gt;     WBGene00010285, WBGene00019293, WBGene00002097, WBGene00007543, WBGene00003722, WBGene00021089, WBGene00012586, WBGene00013891, WBGene00004926, WBGene00010632 </span></span>
-<span><span class="co">#&gt; PC_ 5 </span></span>
-<span><span class="co">#&gt; Positive:  WBGene00007816, WBGene00013850, WBGene00011453, WBGene00015729, WBGene00020151, WBGene00007487, WBGene00016514, WBGene00011433, WBGene00000457, WBGene00003759 </span></span>
-<span><span class="co">#&gt;     WBGene00002105, WBGene00195143, WBGene00003743, WBGene00023414, WBGene00008589, WBGene00003752, WBGene00010575, WBGene00018879, WBGene00001542, WBGene00013166 </span></span>
-<span><span class="co">#&gt;     WBGene00010316, WBGene00008651, WBGene00000483, WBGene00011888, WBGene00010971, WBGene00044582, WBGene00020759, WBGene00017858, WBGene00001456, WBGene00001459 </span></span>
-<span><span class="co">#&gt; Negative:  WBGene00001548, WBGene00001543, WBGene00017076, WBGene00001535, WBGene00009152, WBGene00044568, WBGene00011534, WBGene00018136, WBGene00164973, WBGene00016114 </span></span>
-<span><span class="co">#&gt;     WBGene00219421, WBGene00004207, WBGene00009901, WBGene00011838, WBGene00007314, WBGene00000233, WBGene00020581, WBGene00003890, WBGene00012616, WBGene00000895 </span></span>
-<span><span class="co">#&gt;     WBGene00003722, WBGene00009153, WBGene00044419, WBGene00007542, WBGene00017129, WBGene00014101, WBGene00006669, WBGene00007058, WBGene00015214, WBGene00003614</span></span>
 <span><span class="va">obj</span> <span class="op">=</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/RunUMAP.html" class="external-link">RunUMAP</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">obj</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric</span></span>
-<span><span class="co">#&gt; To use Python UMAP via reticulate, set umap.method to 'umap-learn' and metric to 'correlation'</span></span>
-<span><span class="co">#&gt; This message will be shown once per session</span></span>
-<span><span class="co">#&gt; 22:56:31 UMAP embedding parameters a = 0.9922 b = 1.112</span></span>
-<span><span class="co">#&gt; 22:56:31 Read 6165 rows and found 10 numeric columns</span></span>
-<span><span class="co">#&gt; 22:56:31 Using Annoy for neighbor search, n_neighbors = 30</span></span>
-<span><span class="co">#&gt; 22:56:31 Building Annoy index with metric = cosine, n_trees = 50</span></span>
-<span><span class="co">#&gt; 0%   10   20   30   40   50   60   70   80   90   100%</span></span>
-<span><span class="co">#&gt; [----|----|----|----|----|----|----|----|----|----|</span></span>
-<span><span class="co">#&gt; **************************************************|</span></span>
-<span><span class="co">#&gt; 22:56:32 Writing NN index file to temp file /tmp/RtmpQ0lVwX/file2a0154b636420</span></span>
-<span><span class="co">#&gt; 22:56:32 Searching Annoy index using 1 thread, search_k = 3000</span></span>
-<span><span class="co">#&gt; 22:56:33 Annoy recall = 100%</span></span>
-<span><span class="co">#&gt; 22:56:34 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30</span></span>
-<span><span class="co">#&gt; 22:56:34 Initializing from normalized Laplacian + noise (using irlba)</span></span>
-<span><span class="co">#&gt; 22:56:35 Commencing optimization for 500 epochs, with 240468 positive edges</span></span>
-<span><span class="co">#&gt; 22:56:50 Optimization finished</span></span>
 <span></span>
 <span><span class="co"># Example usage</span></span>
 <span><span class="co">#entropy &lt;- shannon_entropy(obj, method="predefined")</span></span>
-<span><span class="va">entropy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shannon_entropy.html">shannon_entropy</a></span><span class="op">(</span><span class="va">obj</span>, method<span class="op">=</span><span class="st">"RCSA"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Performing log2 transformation due to high skewness</span></span>
-<span><span class="co">#&gt; Calculating reference entropy...</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="va">entropy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shannon_entropy.html">shannon_entropy</a></span><span class="op">(</span><span class="va">obj</span>, method<span class="op">=</span><span class="st">"RCSA"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Calculating reference entropy...</span></span>
+<span><span class="co">## </span></span>
 <span><span class="fl">1</span><span class="op">:</span> <span class="va">Stablility</span> <span class="op">=</span> <span class="fl">0.000006</span></span>
-<span><span class="co">#&gt; Calculating reference entropy...</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="fl">2</span><span class="op">:</span> <span class="va">Stablility</span> <span class="op">=</span> <span class="fl">0.000000</span></span>
-<span><span class="va">obj</span> <span class="op">=</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/AddMetaData.html" class="external-link">AddMetaData</a></span><span class="op">(</span><span class="va">obj</span>, <span class="va">entropy</span>, col.name <span class="op">=</span> <span class="st">"unitTH"</span><span class="op">)</span></span>
+<span><span class="co">## Calculating reference entropy...</span></span>
+<span><span class="co">## </span></span>
+<span><span class="fl">2</span><span class="op">:</span> <span class="va">Stablility</span> <span class="op">=</span> <span class="fl">0.000000</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obj</span> <span class="op">=</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/AddMetaData.html" class="external-link">AddMetaData</a></span><span class="op">(</span><span class="va">obj</span>, <span class="va">entropy</span>, col.name <span class="op">=</span> <span class="st">"unitTH"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">obj</span>, features <span class="op">=</span> <span class="st">"unitTH"</span>, group.by <span class="op">=</span> <span class="st">"embryo.time.bin"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.embryo-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/RidgePlot.html" class="external-link">RidgePlot</a></span><span class="op">(</span><span class="va">obj</span>, features <span class="op">=</span> <span class="st">"unitTH"</span>, group.by <span class="op">=</span> <span class="st">"embryo.time.bin"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Picking joint bandwidth of 0.0154</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/RidgePlot.html" class="external-link">RidgePlot</a></span><span class="op">(</span><span class="va">obj</span>, features <span class="op">=</span> <span class="st">"unitTH"</span>, group.by <span class="op">=</span> <span class="st">"embryo.time.bin"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.embryo-2.png" width="700"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">obj</span>,reduction <span class="op">=</span> <span class="st">"umap"</span>, group.by <span class="op">=</span> <span class="st">"embryo.time.bin"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.embryo-3.png" width="700"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html" class="external-link">FeaturePlot</a></span><span class="op">(</span><span class="va">obj</span>, features <span class="op">=</span> <span class="st">"unitTH"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.embryo-4.png" width="700"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#SeuratData::InstallData("pbmc3k")</span></span>
 <span><span class="va">pbmc3k.final</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/LoadData.html" class="external-link">LoadData</a></span><span class="op">(</span><span class="st">"pbmc3k"</span>, type <span class="op">=</span> <span class="st">"pbmc3k.final"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Validating object structure</span></span>
-<span><span class="co">#&gt; Updating object slots</span></span>
-<span><span class="co">#&gt; Ensuring keys are in the proper structure</span></span>
-<span><span class="co">#&gt; Updating matrix keys for DimReduc 'pca'</span></span>
-<span><span class="co">#&gt; Updating matrix keys for DimReduc 'umap'</span></span>
-<span><span class="co">#&gt; Warning: Graph RNA_nn changing from Graph to Graph</span></span>
-<span><span class="co">#&gt; Warning: Graph RNA_snn changing from Graph to Graph</span></span>
-<span><span class="co">#&gt; Warning: DimReduc pca changing from DimReduc to DimReduc</span></span>
-<span><span class="co">#&gt; Warning: DimReduc umap changing from DimReduc to DimReduc</span></span>
-<span><span class="co">#&gt; Ensuring keys are in the proper structure</span></span>
-<span><span class="co">#&gt; Ensuring feature names don't have underscores or pipes</span></span>
-<span><span class="co">#&gt; Updating slots in RNA</span></span>
-<span><span class="co">#&gt; Updating slots in RNA_nn</span></span>
-<span><span class="co">#&gt; Setting default assay of RNA_nn to RNA</span></span>
-<span><span class="co">#&gt; Updating slots in RNA_snn</span></span>
-<span><span class="co">#&gt; Setting default assay of RNA_snn to RNA</span></span>
-<span><span class="co">#&gt; Updating slots in pca</span></span>
-<span><span class="co">#&gt; Updating slots in umap</span></span>
-<span><span class="co">#&gt; Setting umap DimReduc to global</span></span>
-<span><span class="co">#&gt; Setting assay used for NormalizeData.RNA to RNA</span></span>
-<span><span class="co">#&gt; Setting assay used for FindVariableFeatures.RNA to RNA</span></span>
-<span><span class="co">#&gt; Setting assay used for ScaleData.RNA to RNA</span></span>
-<span><span class="co">#&gt; Setting assay used for RunPCA.RNA to RNA</span></span>
-<span><span class="co">#&gt; Setting assay used for JackStraw.RNA.pca to RNA</span></span>
-<span><span class="co">#&gt; No assay information could be found for ScoreJackStraw</span></span>
-<span><span class="co">#&gt; Warning: Adding a command log without an assay associated with it</span></span>
-<span><span class="co">#&gt; Setting assay used for FindNeighbors.RNA.pca to RNA</span></span>
-<span><span class="co">#&gt; No assay information could be found for FindClusters</span></span>
-<span><span class="co">#&gt; Warning: Adding a command log without an assay associated with it</span></span>
-<span><span class="co">#&gt; Setting assay used for RunUMAP.RNA.pca to RNA</span></span>
-<span><span class="co">#&gt; Validating object structure for Assay 'RNA'</span></span>
-<span><span class="co">#&gt; Validating object structure for Graph 'RNA_nn'</span></span>
-<span><span class="co">#&gt; Validating object structure for Graph 'RNA_snn'</span></span>
-<span><span class="co">#&gt; Validating object structure for DimReduc 'pca'</span></span>
-<span><span class="co">#&gt; Validating object structure for DimReduc 'umap'</span></span>
-<span><span class="co">#&gt; Object representation is consistent with the most current Seurat version</span></span>
 <span><span class="co"># Example usage</span></span>
 <span><span class="co">#entropy &lt;- shannon_entropy(pbmc3k.final, method="predefined")</span></span>
-<span><span class="va">entropy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shannon_entropy.html">shannon_entropy</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, method<span class="op">=</span><span class="st">"RCSA"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Performing log2 transformation due to high skewness</span></span>
-<span><span class="co">#&gt; Calculating reference entropy...</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="va">entropy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shannon_entropy.html">shannon_entropy</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, method<span class="op">=</span><span class="st">"RCSA"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Calculating reference entropy...</span></span>
+<span><span class="co">## </span></span>
 <span><span class="fl">1</span><span class="op">:</span> <span class="va">Stablility</span> <span class="op">=</span> <span class="fl">0.000024</span></span>
-<span><span class="co">#&gt; Calculating reference entropy...</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="fl">2</span><span class="op">:</span> <span class="va">Stablility</span> <span class="op">=</span> <span class="fl">0.000001</span></span>
-<span><span class="va">pbmc3k.final</span> <span class="op">=</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/AddMetaData.html" class="external-link">AddMetaData</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, <span class="va">entropy</span>, col.name <span class="op">=</span> <span class="st">"unitTH"</span><span class="op">)</span></span>
+<span><span class="co">## Calculating reference entropy...</span></span>
+<span><span class="co">## </span></span>
+<span><span class="fl">2</span><span class="op">:</span> <span class="va">Stablility</span> <span class="op">=</span> <span class="fl">0.000001</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pbmc3k.final</span> <span class="op">=</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/AddMetaData.html" class="external-link">AddMetaData</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, <span class="va">entropy</span>, col.name <span class="op">=</span> <span class="st">"unitTH"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#summary(pbmc_small@meta.data)</span></span>
 <span><span class="co">#colnames(pbmc3k.final@meta.data)</span></span>
 <span><span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, features <span class="op">=</span> <span class="st">"unitTH"</span>, group.by <span class="op">=</span> <span class="st">"seurat_annotations"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.pbmc3k-1.png" width="700"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/RidgePlot.html" class="external-link">RidgePlot</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, features <span class="op">=</span> <span class="st">"unitTH"</span>, group.by <span class="op">=</span> <span class="st">"seurat_annotations"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Picking joint bandwidth of 0.023</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/RidgePlot.html" class="external-link">RidgePlot</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, features <span class="op">=</span> <span class="st">"unitTH"</span>, group.by <span class="op">=</span> <span class="st">"seurat_annotations"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.pbmc3k-2.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>,reduction <span class="op">=</span> <span class="st">"umap"</span>, group.by <span class="op">=</span> <span class="st">"seurat_annotations"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.pbmc3k-3.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/FeaturePlot.html" class="external-link">FeaturePlot</a></span><span class="op">(</span><span class="va">pbmc3k.final</span>, features <span class="op">=</span> <span class="st">"unitTH"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="QuickStart_files/figure-html/example.pbmc3k-4.png" width="700"></p>
   </div>
