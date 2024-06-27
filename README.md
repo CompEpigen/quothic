@@ -13,3 +13,5 @@ QuoTHiC (Quantification of Transcription Heterogeneity in Cells) provides functi
 install.packages("devtools")
 devtools::install_github("CompEpigen/quothic")
 ```
+## Documentation
+Please check the tutorial at https://compepigen.github.io/quothic/
