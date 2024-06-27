@@ -1,5 +1,6 @@
 # QuoTHiC
-![image](https://github.com/CompEpigen/quothic/assets/9075573/be3fde93-7235-48ee-84f9-26e6969d17e3)
+![image](https://github.com/CompEpigen/quothic/assets/9075573/97d1e985-e363-45a6-a706-e3ec9d09ed34)
+
 
 
 
