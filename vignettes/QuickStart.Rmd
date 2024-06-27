@@ -1,6 +1,13 @@
 ---
 title: "QuickStart"
-output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
+author: "Mei-Ju May Chen"
+output:
+  rmdformats::downcute:
+    self_contained: true
+    code_folding: show
+    default_style: "light"
+    downcute_theme: "default"
 vignette: >
   %\VignetteIndexEntry{QuickStart}
   %\VignetteEngine{knitr::rmarkdown}
@@ -8,10 +15,14 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+## Global options
+knitr::opts_chunk$set(cache = FALSE, 
+                      echo = TRUE,
+                      message = FALSE,   # Hide messages
+                      warning = FALSE,   # Hide warnings
+                      error = FALSE      # Hide errors
 )
+
 ```
 
 ```{r setup}

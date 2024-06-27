@@ -31,9 +31,11 @@ use_package("viridis", type="Imports")
 library(devtools)
 devtools::document()
 devtools::load_all()
+devtools::build_vignettes()
 
-build_site()
+library(pkgdown)
 build_site_github_pages()
+
 
 remove.packages("quothic")
 # Restart R session
