@@ -1,5 +1,6 @@
 library(usethis)
 library(devtools)
+library(pkgdown)
 
 ## This script is for setting up development dependencies and should be run once during initial setup or when updating dependencies.
 #create_package("/omics/groups/OE0219/internal/MJMC/Tools/quothic")
@@ -31,6 +32,8 @@ library(devtools)
 devtools::document()
 devtools::load_all()
 
+build_site()
+build_site_github_pages()
 
 remove.packages("quothic")
 # Restart R session
