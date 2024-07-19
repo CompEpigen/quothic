@@ -4,7 +4,7 @@
 
 
 
-QuoTHiC (Quantification of Transcription Heterogeneity in Cells) provides functions to calculate transcription heterogeneity indices like Silhouette score, Shannon entropy, Simpson's index (TBA), and the Gini index (TBA) for single-cell RNA-seq data using Seurat objects.
+QuoTHiC (Quantification of Transcription Heterogeneity in Cells) provides functions to calculate transcription heterogeneity indices like Silhouette score and Shannon entropy for single-cell RNA-seq data using Seurat objects.
 
 
 ## Installation
